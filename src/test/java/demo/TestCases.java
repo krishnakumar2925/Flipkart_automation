@@ -69,7 +69,7 @@ public class TestCases {
         wrap.searchBox("Coffee Mug");
         //filter
         wrap.filterSelection("4");
-        //cdet the title and image url of the top 5 highest review products
+        //print the title and image url of the top 5 highest review products
         wrap.topReviewCount();
 
 
