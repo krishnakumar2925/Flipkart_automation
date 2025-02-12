@@ -1,25 +1,24 @@
 package demo;
 
-import org.openqa.selenium.By;
+import java.util.logging.Level;
+
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-
-
-// import io.github.bonigarcia.wdm.WebDriverManager;
 import demo.wrappers.Wrappers;
+//import dev.failsafe.internal.util.Assert;
 
 public class TestCases {
     ChromeDriver driver;
+
+    
 
     /*
      * TODO: Write your tests here with testng @Test annotation. 
@@ -30,6 +29,51 @@ public class TestCases {
     /*
      * Do not change the provided methods unless necessary, they will help in automation and assessment
      */
+
+    @Test
+    public void testCase01() throws InterruptedException{
+        Wrappers wrap =new Wrappers(driver);
+        //launch browser
+        wrap.launchBrowser("https://www.flipkart.com");
+        Assert.assertTrue(driver.getCurrentUrl().contains("flipkart"));
+        //search the item
+        wrap.searchBox("Washing Machine");
+        //sort
+        wrap.sortBy("Popularity");
+        //get the star less than 4 
+        int total = wrap.findTheValue("Stars");
+        System.out.println(total);
+    }
+
+    @Test
+    public void testCase02(){
+        Wrappers wrap =new Wrappers(driver);
+        //launch browser
+        wrap.launchBrowser("https://www.flipkart.com");
+        Assert.assertTrue(driver.getCurrentUrl().contains("flipkart"));
+        //search the item
+        wrap.searchBox("iPhone");
+        StringBuilder build =wrap.getTitileAndDiscount(17);
+        System.out.println(build);
+
+
+    }
+
+    @Test
+    public void testCase03() throws InterruptedException{
+        Wrappers wrap =new Wrappers(driver);
+        //launch browser
+        wrap.launchBrowser("https://www.flipkart.com");
+        Assert.assertTrue(driver.getCurrentUrl().contains("flipkart"));
+        //search the item
+        wrap.searchBox("Coffee Mug");
+        //filter
+        wrap.filterSelection("4");
+        //get the title and image url of the top 5 highest review products
+        wrap.topReviewCount();
+
+
+    }
     @BeforeTest
     public void startBrowser()
     {
